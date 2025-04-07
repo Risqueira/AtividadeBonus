@@ -8,18 +8,23 @@ import java.util.Scanner;
 
 /**
  *
- * 12. Faça um algoritmo que leia dois valores inteiros A e B se os valores
- * forem iguais deverá se somar os dois, caso contrário multiplique A por B. Ao
- * final de qualquer um dos cálculos deve-se atribuir o resultado para uma
- * variável C e mostrar seu conteúdo na tela. Obs.: escreva o algoritmo na folha
- *
+ * 1. Uma empresa quer verificar se um empregado está qualificado para a
+aposentadoria ou não. Para estar em condições, um dos seguintes requisitos deve
+ser satisfeito:
+- Ter no mínimo 65 anos de idade.
+- Ter trabalhado no mínimo 30 anos.
+- Ter no mínimo 60 anos e ter trabalhado no mínimo 25 anos.
+Com base nas informações acima, faça um algoritmo que leia: o número do
+empregado (código), o ano de seu nascimento e o ano de seu ingresso na
+empresa. O programa deverá escrever a idade e o tempo de trabalho do
+empregado e a mensagem &#39;Requerer aposentadoria&#39; ou &#39;Não requerer&#39;..
  * @author Henrique
  */
 public class Teste {
 
     public static void main(String[] args) {
 
-        int idade, anoNascimento, anoIngresso, tempoTrabalhado;
+       int idade, anoNascimento, anoIngresso, tempoTrabalhado, idadeIngressar;
         String codigoEmpregado;
         Scanner ler = new Scanner(System.in);
         Calendar hoje = Calendar.getInstance();
@@ -30,39 +35,46 @@ public class Teste {
         anoNascimento= ler.nextInt();
         System.out.println("Digite o ano que se ingressou na empresa:");
         anoIngresso= ler.nextInt();
-if(idade<18){
-            System.out.println("DE MENOR");
-            return;
-        }
-        if(anoNascimento>=anoAtual){
-            System.out.println("INVALIDO");
-            return;
-        }
-        if(anoIngresso<=anoNascimento){
-            System.out.println("INVALIDO");
-            return;
-        }
-        if(tempoTrabalhado>=idade&&tempoTrabalhado<=idade){
-            System.out.println("INVALIDO");
-            return;
-        }
-        
+
         //calculos de tempo
         int anoAtual = hoje.get(Calendar.YEAR);
         idade = anoAtual-anoNascimento;
         tempoTrabalhado = anoAtual-anoIngresso;
+        idadeIngressar=anoIngresso-anoNascimento;
+        
+        //verificar se tem 18 anos 
+        if(idade<18){
+            System.out.println("INVALIDO");
+            return;
+        }
+        //verificar se a pessoa nao ingressou antes de nascer
+        if(anoIngresso<=anoNascimento){
+            System.out.println("INVALIDO");
+            return;
+        }
+        //verificar se a pessoa nao nasceu no futuro
+        if(anoNascimento>=anoAtual){
+            System.out.println("INVALIDO");
+            return;
+        }
+        //verificar se não ingressou antes dos 18
+        if(idadeIngressar<18){
+            System.out.println("INVALIDO");
+            return;
+        }
+        
         
         if(idade>=65 || tempoTrabalhado>=30){
             System.out.println("O funcionario tem "+idade+" anos "+ "e trabalhou por "+ tempoTrabalhado+ " anos Requerer aposentadoria");
         }else if(idade>=60 && tempoTrabalhado>=25){
             System.out.println("O funcionario tem "+idade+" anos "+ "e trabalhou por "+ tempoTrabalhado+ " anos Requerer aposentadoria");
         }else{
-            System.out.println("O funcionario tem "+idade+" anos "+ "e trabalhou por "+ tempoTrabalhado+ "  anos Não querer aposentadoria");
+            System.out.println("O funcionario tem "+idade+" anos "+ "e trabalhou por "+ tempoTrabalhado+ " anos Não querer aposentadoria");
         }
         
 
-        
     }
+
 }
 ```
 # Questao 2
@@ -97,20 +109,25 @@ public class Exer2 {
         System.out.println("Quantos litros você abasteceu?");
         litros = ler.nextDouble();
 
-        if (tipoCombustivel.equals("1") && litros <= 20) {
+         if (tipoCombustivel.equals("1") && litros > 0 && litros <= 20) {
             precoLitros = (precoAlcool * 0.97) * litros;
             System.out.println("o valor a ser pago é R$" + decimal.format(precoLitros));
+
         } else if (tipoCombustivel.equals("1") && litros > 20) {
             precoLitros = (precoAlcool * 0.95) * litros;
             System.out.println("o valor a ser pago é R$" + decimal.format(precoLitros));
-        } else if (tipoCombustivel.equals("2") && litros <= 20) {
+
+        } else if (tipoCombustivel.equals("2") && litros > 0 && litros <= 20) {
             precoLitros = (precoGaso * 0.96) * litros;
             System.out.println("o valor a ser pago é R$" + decimal.format(precoLitros));
+
         } else if (tipoCombustivel.equals("2") && litros > 20) {
             precoLitros = (precoGaso * 0.94) * litros;
             System.out.println("o valor a ser pago é R$" + decimal.format(precoLitros));
-        }
 
+        } else {
+            System.out.println("Tipo de gasolina invalido ou valor de litros invalido");
+        }
     }
 
 }
