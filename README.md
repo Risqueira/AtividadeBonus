@@ -30,6 +30,22 @@ public class Teste {
         anoNascimento= ler.nextInt();
         System.out.println("Digite o ano que se ingressou na empresa:");
         anoIngresso= ler.nextInt();
+if(idade<18){
+            System.out.println("DE MENOR");
+            return;
+        }
+        if(anoNascimento>=anoAtual){
+            System.out.println("INVALIDO");
+            return;
+        }
+        if(anoIngresso<=anoNascimento){
+            System.out.println("INVALIDO");
+            return;
+        }
+        if(tempoTrabalhado>=idade&&tempoTrabalhado<=idade){
+            System.out.println("INVALIDO");
+            return;
+        }
         
         //calculos de tempo
         int anoAtual = hoje.get(Calendar.YEAR);
